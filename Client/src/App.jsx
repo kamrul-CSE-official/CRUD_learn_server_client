@@ -5,6 +5,22 @@ export default function App() {
     const name = from.name.value;
     const email = from.email.value;
     console.log("Name: ", name, " Email: ", email);
+    const user = {name, email};
+    fetch("http://localhost:5000/", {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(req => req.json())
+    .then(res => {console.log(res);
+      if(res.insertedId){
+        alert("Data added succussfully");
+        from.reset();
+      }
+    })
+    .catch(error => console.log(error));
   };
   return (
     <div>
