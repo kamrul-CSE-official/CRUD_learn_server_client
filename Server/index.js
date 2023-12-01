@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const env = require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri =
-  "mongodb+srv://crud_learn:9wheEwgspilpZ3ut@cluster0.hielk35.mongodb.net/?retryWrites=true&w=majority";
+  `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.hielk35.mongodb.net/?retryWrites=true&w=majority`;
 const app = express();
 
 app.use(cors());
@@ -80,8 +81,8 @@ async function run() {
 run().catch(console.dir);
 
 console.log("Run");
-// pass: 9wheEwgspilpZ3ut
-// name: crud_learn
+// pass: ${process.env.PASS}
+// name: ${process.env.NAME}
 
 const port = 5000;
 app.listen(port, () => console.log(`This server runing by port: ${port}`));
